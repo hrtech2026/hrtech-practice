@@ -1,0 +1,40 @@
+# Манифест координационного репозитория.
+#
+# Описывает, какие части репозитория обновляются автоматикой из пульта
+# управления, а какие ведутся вручную преподавателем. Воркфлоу publish-site.yml
+# читает этот файл, чтобы не затереть правки преподавателя.
+
+version: 1
+generated_by: publish-site.yml
+
+# Полностью перезаписывается автоматикой. Правки преподавателя здесь
+# не сохраняются, и это сделано намеренно: иначе в публичную ветку
+# может попасть неочищенный реестр.
+managed:
+  - path: data/teams.json
+    source: data/public/teams.json
+    description: Очищенный снимок реестра команд
+  - path: site/
+    source: dashboard/dist/
+    description: Собранная статика витрины
+
+# Ведётся преподавателем вручную, автоматика не трогает.
+manual:
+  - path: README.md
+    description: Витрина репозитория
+  - path: docs/
+    description: Регламент, расписание, критерии, метододика, FAQ
+  - path: .github/ISSUE_TEMPLATE/
+    description: Формы заявки, вопроса и апелляции
+  - path: .github/workflows/pages.yml
+    description: Публикация витрины
+  - path: data/reviews/
+    description: Анонимизированные отчёты peer review
+
+# Публикация запрещена: содержимое пульта управления.
+forbidden_here:
+  - data/expert_scores.schema.json
+  - data/kanban_drift.json
+  - data/teams.schema.json
+  - scripts/
+  - services/

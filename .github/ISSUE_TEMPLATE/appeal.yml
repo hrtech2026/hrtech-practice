@@ -1,0 +1,48 @@
+name: Апелляция
+description: Оспаривание выставленной оценки по конкретному критерию
+title: "[Апелляция] "
+labels: ["appeal"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Заявление подаётся в течение 5 рабочих дней с даты публикации оценки.
+        Рассмотрение — 10 рабочих дней, решение фиксируется письменно.
+        Повторная апелляция по тем же основаниям не рассматривается.
+
+  - type: input
+    id: appeal-team
+    attributes:
+      label: Команда
+      placeholder: team-onboarding-03
+    validations:
+      required: true
+
+  - type: dropdown
+    id: appeal-criterion
+    attributes:
+      label: Критерий
+      options:
+        - "1. Качество анализа AS-IS (20)"
+        - "2. Обоснованность архитектуры TO-BE (30)"
+        - "3. Риски ИИ и корректность HITL (30)"
+        - "4. Документация и требования (20)"
+    validations:
+      required: true
+
+  - type: input
+    id: appeal-aspect
+    attributes:
+      label: Аспект
+      description: Конкретный аспект критерия из таблицы в docs/criteria.md.
+      placeholder: Объяснимость — 5 баллов
+    validations:
+      required: true
+
+  - type: textarea
+    id: appeal-argument
+    attributes:
+      label: Аргумент
+      description: Ссылайтесь на конкретные места в документах команды.
+    validations:
+      required: true

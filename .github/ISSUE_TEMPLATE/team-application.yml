@@ -1,0 +1,104 @@
+name: Заявка на команду
+description: Заявка на создание репозитория команды. Один Issue на команду.
+title: "[Команда] "
+labels: ["team-application"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Репозиторий команды создаёт преподаватель после проверки заявки.
+
+        Заполните все поля. Несколько заявок от одной команды будут закрыты,
+        отработает только первая. Состав можно изменить позже отдельным
+        Pull Request в вашем репозитории, но первоначальный состав должен
+        совпадать с журналом группы.
+
+  - type: input
+    id: team-name
+    attributes:
+      label: Название команды
+      description: От 3 до 60 символов. Так команда будет называться на витрине.
+      placeholder: Онбординг 2.0
+    validations:
+      required: true
+
+  - type: dropdown
+    id: team-track
+    attributes:
+      label: Трек
+      description: Предметная область вашего решения.
+      options:
+        - Найм
+        - Онбординг
+        - Выгорание
+        - Оценка
+        - Обучение
+        - Прочее
+    validations:
+      required: true
+
+  - type: input
+    id: team-group
+    attributes:
+      label: Номер группы
+      description: Например ИП-215.
+      placeholder: ИП-215
+    validations:
+      required: true
+
+  - type: input
+    id: team-number
+    attributes:
+      label: Номер команды в группе
+      description: Двузначное число. Определяет имя репозитория, team-<трек>-<NN>.
+      placeholder: "03"
+    validations:
+      required: true
+
+  - type: textarea
+    id: team-members
+    attributes:
+      label: Участники (GitHub)
+      description: От 3 до 5 логинов через запятую. Логины должны существовать.
+      placeholder: ivanov, petrova, sidorova
+    validations:
+      required: true
+
+  - type: input
+    id: team-captain
+    attributes:
+      label: Капитан
+      description: GitHub-логин капитана, он должен быть в списке участников.
+      placeholder: ivanov
+    validations:
+      required: true
+
+  - type: input
+    id: team-telegram
+    attributes:
+      label: Telegram капитана
+      description: Для уведомлений о дедлайнах и назначения peer review.
+      placeholder: "@ivanov"
+    validations:
+      required: true
+
+  - type: textarea
+    id: team-concept
+    attributes:
+      label: Одно предложение о концепте
+      description: До 200 символов. Публикуется на витрине проектов.
+      placeholder: Единая точка входа в базу знаний с учётом роли сотрудника.
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: team-acknowledgement
+    attributes:
+      label: Подтверждение
+      options:
+        - label: Состав соответствует журналу группы
+          required: true
+        - label: Участники создали аккаунты GitHub и присоединились к организации
+          required: true
+        - label: Один участник не совмещает больше двух ролей
+          required: true
