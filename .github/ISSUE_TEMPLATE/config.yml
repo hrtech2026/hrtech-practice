@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: FAQ
+    url: https://github.com/YOUR_STUDENT_ORG/hrtech-practice/blob/main/docs/faq.md
+    about: Частые вопросы, сначала посмотрите здесь
+  - name: Методические указания
+    url: https://github.com/YOUR_STUDENT_ORG/hrtech-practice/blob/main/docs/methodology.md
+    about: Как писать каждый из четырёх документов
+  - name: Эталон командного репозитория
+    url: https://github.com/YOUR_STUDENT_ORG/team-template
+    about: Структура и шаблоны документов

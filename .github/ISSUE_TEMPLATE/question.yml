@@ -1,0 +1,45 @@
+name: Вопрос по практике
+description: Вопрос преподавателю, если ответ не найден в FAQ и метододике
+title: "[Вопрос] "
+labels: ["question"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Перед отправкой проверьте `docs/faq.md` и `docs/methodology.md` —
+        большинство вопросов возникает из-за неполного заполнения разделов.
+
+        Не создавайте Issue в чужом командном репозитории: так вопрос потеряется
+        среди задач команды.
+
+  - type: dropdown
+    id: question-area
+    attributes:
+      label: Область вопроса
+      options:
+        - Сдача и дедлайны
+        - Содержание документов
+        - Валидация и ошибки
+        - Git и репозиторий
+        - Peer review
+        - Оценка и апелляция
+        - Организационное
+    validations:
+      required: true
+
+  - type: input
+    id: question-team
+    attributes:
+      label: Команда
+      description: Заполните, если вопрос относится к вашей команде.
+      placeholder: team-onboarding-03
+    validations:
+      required: false
+
+  - type: textarea
+    id: question-body
+    attributes:
+      label: Вопрос
+      description: Опишите, что не получается, и что уже пробовали.
+    validations:
+      required: true

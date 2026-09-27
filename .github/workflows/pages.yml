@@ -1,0 +1,58 @@
+name: Публикация витрины
+description: >-
+  Разворачивает статику витрины из ветки site. Содержимое ветки site
+  целиком подготовлено в пульте управления: сборка и очистка данных
+  происходят там, здесь только публикация.
+
+on:
+  push:
+    branches: [site]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages-site
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: Публикация витрины
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Настроить Pages
+        id: pages
+        uses: actions/configure-pages@v6
+
+      - name: Получить ветку site
+        uses: actions/checkout@v7
+        with:
+          ref: site
+          path: site
+
+      - name: Проверить наличие снимка данных
+        run: |
+          if [ ! -f site/data/teams.json ]; then
+            echo "::error::в ветке site нет data/teams.json, витрина покажет пустоту"
+            exit 1
+          fi
+          python3 -c "import json,sys; d=json.load(open('site/data/teams.json')); \
+            print('команд в снимке:', len(d.get('teams', [])))"
+
+      - name: Загрузить артефакт Pages
+        id: artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: site
+
+      - name: Опубликовать
+        id: deployment
+        uses: actions/deploy-pages@v5
