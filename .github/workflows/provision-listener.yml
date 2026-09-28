@@ -7,8 +7,8 @@ description: >-
 
   Почему отдельный слушатель. Воркфлоу с on: issues срабатывает только на
   Issue собственного репозитория, а заявка лежит здесь, а создавать репозиторий
-  нужно в пульте. Мост — repository_dispatch с правом Actions на пульт, и
-  больше ничего: секрет даёт ровно это право.
+  нужно в пульте. Мост — запуск воркфлоу пульта по имени, и больше ничего:
+  секрет даёт ровно это право.
 
   Что считается заявкой, определяет тело Issue, а не метка. Метку формы могло
   не проставиться или её могли снять, а тело с заголовками «### Название
@@ -21,6 +21,8 @@ description: >-
   Заявка уходит в тот воркфлоу пульта, который умеет её выполнить:
   CONTROL_WORKFLOW для provision, CONTROL_ROSTER_WORKFLOW для roster. Одна
   общая переменная отправляла бы замену состава туда, где она падает.
+  Отправка идёт через workflow_dispatch, а не repository_dispatch: первый
+  запускает один воркфлоу по имени, второй разбудил бы оба сразу.
 
   Секретов у самого координационного репозитория нет: чтение и запись Issue
   делает встроенный github.token с объявленным issues: write. Единственный
@@ -181,7 +183,7 @@ jobs:
           CONTROL_REPO: ${{ vars.CONTROL_REPO }}
           WORKFLOW_PROVISION: ${{ vars.CONTROL_WORKFLOW }}
           WORKFLOW_ROSTER: ${{ vars.CONTROL_ROSTER_WORKFLOW }}
-          COORDINATION_REPO: ${{ github.repository }}
+          CONTROL_REF: ${{ vars.CONTROL_REF }}
         run: |
           set -euo pipefail
           if [ -z "$GH_TOKEN" ]; then
@@ -194,23 +196,43 @@ jobs:
           # состава в provision-team.yml, где она падала бы как незаполненная
           # заявка на создание. ${VAR:?текст} падает сразу и внятно, если
           # переменную забыли задать.
+          #
+          # Здесь важен именно этот endpoint. `/actions/workflows/<file>/dispatches`
+          # — это workflow_dispatch: он запускает ОДИН воркфлоу по имени, и
+          # поэтому разделение на CONTROL_WORKFLOW и CONTROL_ROSTER_WORKFLOW
+          # работает. Соседний `/dispatches` — это repository_dispatch, он
+          # разбудит оба воркфлоу сразу, потому что на него подписан и
+          # provision-team.yml, и sync-roster.yml, и ростра-заявка уедет туда же.
+          #
+          # Тело обязано соответствовать адресу. Для workflow_dispatch это `ref`
+          # и `inputs`; `event_type` и `client_payload` оттуда GitHub отвергает
+          # с 422, и это проверяется живым прогоном, а не чтением кода.
           case "$ACTION" in
-            provision) target="${WORKFLOW_PROVISION:?не задана переменная CONTROL_WORKFLOW}" ;;
-            roster)    target="${WORKFLOW_ROSTER:?не задана переменная CONTROL_ROSTER_WORKFLOW}" ;;
+            provision)
+              target="${WORKFLOW_PROVISION:?не задана переменная CONTROL_WORKFLOW}"
+              mode="provision"
+              ;;
+            roster)
+              target="${WORKFLOW_ROSTER:?не задана переменная CONTROL_ROSTER_WORKFLOW}"
+              mode="apply"
+              ;;
             *)
               echo "::error::неизвестное действие для передачи: $ACTION"
               exit 1
               ;;
           esac
           echo "::add-mask::"
+          # Режим передаём явно. У обоих воркфлоу пуля `inputs.mode` по
+          # умолчанию равен dry-run, а пустой inputs.mode при ручном запуске
+          # подставился бы дефолтом и заявка тихо ничего не создала бы.
+          #
           # Право ровно одно: запустить воркфлоу в пульте. Тело Issue, состав и
           # учётные данные сюда не копируются — воркфлоу пульта читает Issue сам.
           gh api -X POST \
             "repos/${CONTROL_OWNER:?не задана переменная CONTROL_OWNER}/${CONTROL_REPO:?не задана переменная CONTROL_REPO}/actions/workflows/${target}/dispatches" \
-            -f event_type=repository_dispatch \
-            -f "client_payload[kind]=${ACTION}" \
-            -f "client_payload[issue_number]=${ISSUE_NUMBER}" \
-            -f "client_payload[coordination_repo]=${COORDINATION_REPO}" >/dev/null
+            -f "ref=${CONTROL_REF:?не задана переменная CONTROL_REF}" \
+            -f "inputs[issue_number]=${ISSUE_NUMBER}" \
+            -f "inputs[mode]=${mode}" >/dev/null
           {
             echo ""
             echo "Issue #${ISSUE_NUMBER} передано в пульт, воркфлот \`${target}\`:"
