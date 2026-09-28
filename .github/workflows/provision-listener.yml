@@ -1,0 +1,212 @@
+name: Заявки команд
+description: >-
+  Находит заявку на команду или на изменение состава в этом репозитории и
+  передаёт её в пульт управления. Никакой логики создания репозиториев здесь
+  нет: она живёт в .github/workflows/provision-team.yml пульта, чтобы её не
+  пришлось держать в публичном репозитории, который видят студенты.
+
+  Почему отдельный слушатель. Воркфлоу с on: issues срабатывает только на
+  Issue собственного репозитория, а заявка лежит здесь, а создавать репозиторий
+  нужно в пульте. Мост — repository_dispatch с правом Actions на пульт, и
+  больше ничего: секрет даёт ровно это право.
+
+  Что считается заявкой, определяет тело Issue, а не метка. Метку формы могло
+  не проставиться или её могли снять, а тело с заголовками «### Название
+  команды» и «### Участники (GitHub)» нельзя написать руками: в config.yml
+  отключены пустые Issue, отправлять можно только через формы.
+
+  Допуск — метка. Ничего не создаётся, пока преподаватель не добавит
+  provision (создание репозитория) или roster (изменение состава).
+
+  Заявка уходит в тот воркфлоу пульта, который умеет её выполнить:
+  CONTROL_WORKFLOW для provision, CONTROL_ROSTER_WORKFLOW для roster. Одна
+  общая переменная отправляла бы замену состава туда, где она падает.
+
+  Секретов у самого координационного репозитория нет: чтение и запись Issue
+  делает встроенный github.token с объявленным issues: write. Единственный
+  секрет — DISPATCH_TOKEN, потому что запустить воркфлоу в другом
+  репозитории встроенный токен не умеет, и у него ровно одно право.
+
+  Слушатель ничего не разбирает и ни о чём не решает: он только смотрит,
+  что за событие пришло, и переадресует. Всю проверку заявки пульт делает заново
+  по собственным правилам, поэтому подделать решение здесь нельзя.
+
+on:
+  issues:
+    types: [opened, reopened, labeled, edited]
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: Номер Issue для разбора, если запускается вручную
+        required: true
+        type: string
+      mode:
+        description: Режим
+        type: choice
+        options:
+          - report
+          - provision
+          - roster
+        default: report
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: coordination-listen-${{ github.event.issue.number || inputs.issue_number }}
+  cancel-in-progress: false
+
+jobs:
+  dispatch:
+    name: Передать заявку в пульт
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Классифицировать Issue
+        id: issue
+        env:
+          # Встроенный токен, а не PAT: воркфлоу объявляет issues: write и
+          # работает только со своим репозиторием, поэтому копия прав в
+          # публичном `hrtech-practice` не нужна и опасна.
+          GH_TOKEN: ${{ github.token }}
+          DISPATCH_MODE: ${{ github.event.label.name || inputs.mode }}
+        run: |
+          set -euo pipefail
+          echo "::add-mask::$GH_TOKEN"
+          gh issue view "${{ github.event.issue.number || inputs.issue_number }}" \
+            --json number,body,state,labels,title > issue.json
+          python3 - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          payload = json.loads(Path("issue.json").read_text(encoding="utf-8"))
+          body = payload.get("body") or ""
+          labels = [item.get("name", "") for item in payload.get("labels") or []]
+
+          # Признак заявки — тело, а не метка. Так заявка опознаётся, даже если
+          # метка team-application не была проставлена или её сняли.
+          is_application = "### Название команды" in body
+          is_roster = ("### Команда" in body) and ("### Участники (GitHub)" in body)
+          action = os.environ.get("DISPATCH_MODE") or "report"
+
+          outputs = {
+              "number": str(payload["number"]),
+              "is_application": "true" if is_application else "false",
+              "is_roster": "true" if is_roster else "false",
+              "recognized": "true" if (is_application or is_roster) else "false",
+              "done": "true" if "provisioned" in labels else "false",
+              "action": action,
+              "labels": ", ".join(labels) or "—",
+              "state": payload.get("state", "?"),
+          }
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as handle:
+              for key, value in outputs.items():
+                  print(f"{key}={value}")
+                  handle.write(f"{key}={value}\n")
+          PY
+
+      - name: "Метка не сработала: это не заявка"
+        if: >-
+          steps.issue.outputs.action != 'report'
+            && steps.issue.outputs.recognized != 'true'
+        run: |
+          {
+            echo "### Метка `${{ steps.issue.outputs.action }}` не привела к действию"
+            echo ""
+            echo "Issue #${{ steps.issue.outputs.number }} не заполнен через форму заявки:"
+            echo "в теле нет заголовков \`### Название команды\` или \`### Команда\`."
+            echo "Так бывает, если метку сняли с одного Issue и повесили на другой."
+            echo "Ничего не создано."
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: "Заявка уже обработана"
+        if: >-
+          (steps.issue.outputs.action == 'provision'
+            || steps.issue.outputs.action == 'roster')
+            && steps.issue.outputs.done == 'true'
+        run: |
+          {
+            echo "### Заявка уже обработана"
+            echo ""
+            echo "На Issue #${{ steps.issue.outputs.number }} уже стоит метка \`provisioned\`."
+            echo "Повторный запуск ничего не меняет. Если нужно поменять состав — это"
+            echo "отдельная заявка «Изменение состава», а не новая метка \`provision\`."
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: "Подтвердить, что заявка принята"
+        if: >-
+          steps.issue.outputs.action == 'report'
+            && steps.issue.outputs.is_application == 'true'
+            && steps.issue.outputs.done != 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          body="Заявка принята. Репозиторий создаст воркфлоут, как только преподаватель
+          проверит состав и добавит метку \`provision\`.
+
+          Если состав указан неверно — отредактируйте поля прямо в этом Issue,
+          правки подхватятся автоматически. Права на запись выдаются по заявке,
+          поэтому состав меняется только здесь, а не в репозитории."
+          # Комментарий ставим один раз: Issue переоткрывают и редактируют, и
+          # повторный триаж на каждое событие только шумит.
+          if gh issue view "${{ steps.issue.outputs.number }}" --json comments \
+               --jq '.comments[].body' | grep -q "Заявка принята"; then
+            echo "подтверждение уже было, пропускаем"
+          else
+            printf '%s\n' "$body" | gh issue comment \
+              "${{ steps.issue.outputs.number }}" --body-file -
+          fi
+
+      - name: Передать в пульт
+        if: >-
+          (steps.issue.outputs.action == 'provision'
+            || steps.issue.outputs.action == 'roster')
+            && steps.issue.outputs.done != 'true'
+            && steps.issue.outputs.recognized == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.DISPATCH_TOKEN }}
+          ACTION: ${{ steps.issue.outputs.action }}
+          ISSUE_NUMBER: ${{ steps.issue.outputs.number }}
+          CONTROL_OWNER: ${{ vars.CONTROL_OWNER }}
+          CONTROL_REPO: ${{ vars.CONTROL_REPO }}
+          WORKFLOW_PROVISION: ${{ vars.CONTROL_WORKFLOW }}
+          WORKFLOW_ROSTER: ${{ vars.CONTROL_ROSTER_WORKFLOW }}
+          COORDINATION_REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          if [ -z "$GH_TOKEN" ]; then
+            echo "::error::не задан секрет DISPATCH_TOKEN, передать заявку в пульт нечем"
+            exit 1
+          fi
+          echo "::add-mask::$GH_TOKEN"
+          # В пульте два воркфлоу, и заявка должна попасть в тот, который умеет
+          # её выполнить. Один общий CONTROL_WORKFLOW молча отправлял бы замену
+          # состава в provision-team.yml, где она падала бы как незаполненная
+          # заявка на создание. ${VAR:?текст} падает сразу и внятно, если
+          # переменную забыли задать.
+          case "$ACTION" in
+            provision) target="${WORKFLOW_PROVISION:?не задана переменная CONTROL_WORKFLOW}" ;;
+            roster)    target="${WORKFLOW_ROSTER:?не задана переменная CONTROL_ROSTER_WORKFLOW}" ;;
+            *)
+              echo "::error::неизвестное действие для передачи: $ACTION"
+              exit 1
+              ;;
+          esac
+          echo "::add-mask::"
+          # Право ровно одно: запустить воркфлоу в пульте. Тело Issue, состав и
+          # учётные данные сюда не копируются — воркфлоу пульта читает Issue сам.
+          gh api -X POST \
+            "repos/${CONTROL_OWNER:?не задана переменная CONTROL_OWNER}/${CONTROL_REPO:?не задана переменная CONTROL_REPO}/actions/workflows/${target}/dispatches" \
+            -f event_type=repository_dispatch \
+            -f "client_payload[kind]=${ACTION}" \
+            -f "client_payload[issue_number]=${ISSUE_NUMBER}" \
+            -f "client_payload[coordination_repo]=${COORDINATION_REPO}" >/dev/null
+          {
+            echo ""
+            echo "Issue #${ISSUE_NUMBER} передано в пульт, воркфлот \`${target}\`:"
+            echo "действие \`${ACTION}\`."
+          } >> "$GITHUB_STEP_SUMMARY"

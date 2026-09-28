@@ -23,13 +23,15 @@ manual:
   - path: README.md
     description: Витрина репозитория
   - path: docs/
-    description: Регламент, расписание, критерии, метододика, FAQ
+    description: Регламент, расписание, критерии, методика, инструкция, FAQ
   - path: .github/ISSUE_TEMPLATE/
-    description: Формы заявки, вопроса и апелляции
+    description: Формы заявки, изменения состава, вопроса и апелляции
   - path: .github/workflows/pages.yml
     description: Публикация витрины
-  - path: data/reviews/
-    description: Анонимизированные отчёты peer review
+  - path: .github/workflows/seed-labels.yml
+    description: Создание меток Issue
+  - path: .github/workflows/provision-listener.yml
+    description: Передача заявок в пульт управления
 
 # Публикация запрещена: содержимое пульта управления.
 forbidden_here:

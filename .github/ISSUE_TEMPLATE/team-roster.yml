@@ -1,0 +1,65 @@
+name: Изменение состава
+description: >-
+  Замена состава команды: ушёл участник, сменился капитан, кто-то присоединился.
+  Один Issue — полный новый состав, а не «удалить вот этого».
+title: "[Состав] "
+labels: ["roster-change"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Права на запись в репозиторий выдаются **только по заявке**. Правки
+        `data/meta.yml` в самом репозитории не дадут доступа: файл перезаписывается
+        по вашей заявке, и расхождение с правами на GitHub будет обнаружено
+        проверкой.
+
+        Поэтому состав меняется здесь. Укажите новый состав целиком — так нечего
+        пересчитывать, и после применения вы увидите в комментарии, кто добавился
+        и кто снят.
+
+        Новичкам GitHub отправит письмо с приглашением в репозиторий — нужно
+        один раз нажать **Accept**. Вступать в организацию не нужно.
+
+  - type: input
+    id: roster-team
+    attributes:
+      label: Команда
+      description: >-
+        Идентификатор команды из `data/meta.yml`, например `team-onboarding-03`.
+      placeholder: team-onboarding-03
+    validations:
+      required: true
+
+  - type: textarea
+    id: roster-members
+    attributes:
+      label: Участники (GitHub)
+      description: >-
+        От 3 до 5 логинов через запятую, полный новый состав. Аккаунт должен
+        существовать — этого достаточно.
+      placeholder: ivanov, petrova, sidorova
+    validations:
+      required: true
+
+  - type: input
+    id: roster-captain
+    attributes:
+      label: Капитан
+      description: >-
+        GitHub-логин капитана из нового состава. Если капитан сменился, прежний
+        получит роль участника автоматически.
+      placeholder: ivanov
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: roster-acknowledgement
+    attributes:
+      label: Подтверждение
+      options:
+        - label: Состав соответствует журналу группы
+          required: true
+        - label: Участники создали аккаунты GitHub и согласятся принять приглашение в репозиторий
+          required: true
+        - label: Один участник не совмещает больше двух ролей
+          required: true

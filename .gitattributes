@@ -1,0 +1,19 @@
+# Окончания строк в LF. Обязательно: в репозитории крутятся воркфлоу, а
+# CRLF в YAML и shell-скриптах ломает их на runner. У преподавателя на машине
+# системный core.autocrlf=true, поэтому без этого правила файлы попадут сюда
+# с CRLF — и поломаются не сразу, а на первом же запуске.
+* text=auto eol=lf
+
+# Windows-скрипты — CRLF
+*.ps1 text eol=crlf
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Бинарные файлы
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.zip binary
