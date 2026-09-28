@@ -33,14 +33,19 @@ jobs:
           # Встроенный токен: воркфлоу объявляет issues: write и трогает только
           # свой репозиторий, поэтому PAT в публичном репозитории не нужен.
           GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
         run: |
           set -euo pipefail
           echo "::add-mask::$GH_TOKEN"
+          # --repo обязателен: checkout в этом воркфлоу нет, а gh без него
+          # пытается определить репозиторий через git и падает на отсутствии
+          # .git. Это неочевидная ошибка, поэтому она и записана здесь.
           while IFS='|' read -r name color description; do
             [ -n "$name" ] || continue
             # create --force пересоздаёт метку, если она уже есть, поэтому
             # повторный запуск ничего не ломает.
-            gh label create "$name" --color "$color" --description "$description" --force
+            gh label create "$name" --repo "$REPO" \
+              --color "$color" --description "$description" --force
             echo "- \`$name\` — $description" >> "$GITHUB_STEP_SUMMARY"
           done <<'LABELS'
           team-application|0e8a16|Заявка на создание репозитория команды

@@ -72,10 +72,14 @@ jobs:
           # публичном `hrtech-practice` не нужна и опасна.
           GH_TOKEN: ${{ github.token }}
           DISPATCH_MODE: ${{ github.event.label.name || inputs.mode }}
+          REPO: ${{ github.repository }}
         run: |
           set -euo pipefail
           echo "::add-mask::$GH_TOKEN"
+          # --repo обязателен: checkout здесь нет, а gh без него ищет репозиторий
+          # через git и падает «not a git repository». Проверено живым запуском.
           gh issue view "${{ github.event.issue.number || inputs.issue_number }}" \
+            --repo "$REPO" \
             --json number,body,state,labels,title > issue.json
           python3 - <<'PY'
           import json
@@ -143,6 +147,8 @@ jobs:
             && steps.issue.outputs.done != 'true'
         env:
           GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          ISSUE_NUMBER: ${{ steps.issue.outputs.number }}
         run: |
           set -euo pipefail
           body="Заявка принята. Репозиторий создаст воркфлоут, как только преподаватель
@@ -153,12 +159,12 @@ jobs:
           поэтому состав меняется только здесь, а не в репозитории."
           # Комментарий ставим один раз: Issue переоткрывают и редактируют, и
           # повторный триаж на каждое событие только шумит.
-          if gh issue view "${{ steps.issue.outputs.number }}" --json comments \
+          if gh issue view "$ISSUE_NUMBER" --repo "$REPO" --json comments \
                --jq '.comments[].body' | grep -q "Заявка принята"; then
             echo "подтверждение уже было, пропускаем"
           else
             printf '%s\n' "$body" | gh issue comment \
-              "${{ steps.issue.outputs.number }}" --body-file -
+              "$ISSUE_NUMBER" --repo "$REPO" --body-file -
           fi
 
       - name: Передать в пульт
