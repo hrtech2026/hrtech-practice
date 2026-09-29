@@ -1,0 +1,64 @@
+name: Создание меток координации
+description: >-
+  Создаёт метки Issue, на которые ссылаются формы заявок. GitHub молча не
+  проставляет метку, которой нет в репозитории, поэтому без этого шага заявка
+  не получила бы метку team-application и не попала бы в очередь.
+  Идемпотентный: запускать можно сколько угодно раз.
+
+  Список меток ниже повторяет student.coordination.labels из
+  config/infrastructure.yaml в пульте управления. Скрипт scripts/check_hub.py
+  проверяет, что две копии совпадают: иначе форма сослалась бы на метку,
+  которой не существует, и заявка потерялась бы молча.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: seed-coordination-labels
+  cancel-in-progress: false
+
+jobs:
+  seed:
+    name: Создать метки
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Создать метки
+        env:
+          # Встроенный токен: воркфлоу объявляет issues: write и трогает только
+          # свой репозиторий, поэтому PAT в публичном репозитории не нужен.
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          echo "::add-mask::$GH_TOKEN"
+          # --repo обязателен: checkout в этом воркфлоу нет, а gh без него
+          # пытается определить репозиторий через git и падает на отсутствии
+          # .git. Это неочевидная ошибка, поэтому она и записана здесь.
+          while IFS='|' read -r name color description; do
+            [ -n "$name" ] || continue
+            # create --force пересоздаёт метку, если она уже есть, поэтому
+            # повторный запуск ничего не ломает.
+            gh label create "$name" --repo "$REPO" \
+              --color "$color" --description "$description" --force
+            echo "- \`$name\` — $description" >> "$GITHUB_STEP_SUMMARY"
+          done <<'LABELS'
+          team-application|0e8a16|Заявка на создание репозитория команды
+          roster-change|1d76db|Заявка на изменение состава команды
+          provision|b60205|Допуск преподавателя, репозиторий будет создан
+          roster|5319e7|Допуск преподавателя, состав будет применён
+          provisioned|c2e0c6|Репозиторий команды создан
+          rostered|c5def5|Состав команды применён
+          question|d4c5f9|Вопрос по практике
+          appeal|f9d0c4|Апелляция
+          needs-triage|ededed|Ожидает преподавателя
+          LABELS
+          {
+            echo ""
+            echo "Метки координации созданы или обновлены."
+          } >> "$GITHUB_STEP_SUMMARY"
