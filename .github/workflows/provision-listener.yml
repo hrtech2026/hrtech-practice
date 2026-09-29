@@ -98,12 +98,19 @@ jobs:
           is_roster = ("### Команда" in body) and ("### Участники (GitHub)" in body)
           action = os.environ.get("DISPATCH_MODE") or "report"
 
+          # У каждого действия своя метка завершения. Общая на оба работала так,
+          # что заявка на состав закрывалась меткой `provisioned`, после чего
+          # слушатель считал обработанной любую заявку этого Issue — и повтор
+          # становился невозможен, хотя текст об ошибке предлагает именно повтор.
+          done_label = "rostered" if action == "roster" else "provisioned"
+
           outputs = {
               "number": str(payload["number"]),
               "is_application": "true" if is_application else "false",
               "is_roster": "true" if is_roster else "false",
               "recognized": "true" if (is_application or is_roster) else "false",
-              "done": "true" if "provisioned" in labels else "false",
+              "done": "true" if done_label in labels else "false",
+              "done_label": done_label,
               "action": action,
               "labels": ", ".join(labels) or "—",
               "state": payload.get("state", "?"),
@@ -137,7 +144,7 @@ jobs:
           {
             echo "### Заявка уже обработана"
             echo ""
-            echo "На Issue #${{ steps.issue.outputs.number }} уже стоит метка \`provisioned\`."
+            echo "На Issue #${{ steps.issue.outputs.number }} уже стоит метка \`${{ steps.issue.outputs.done_label }}\`."
             echo "Повторный запуск ничего не меняет. Если нужно поменять состав — это"
             echo "отдельная заявка «Изменение состава», а не новая метка \`provision\`."
           } >> "$GITHUB_STEP_SUMMARY"
