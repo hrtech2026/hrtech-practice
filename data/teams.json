@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-29T09:59:35Z",
+  "generated_at": "2026-09-30T08:19:56Z",
   "source": "sanitize-registry",
   "stages": [
     {
@@ -62,20 +62,20 @@
   ],
   "teams": [
     {
-      "id": "team-hiring-00",
-      "name": "Test Team",
-      "slug": "team-hiring-00",
+      "id": "team-hiring-01",
+      "name": "Test Team 2",
+      "slug": "team-hiring-01",
       "track": "hiring",
       "group": "АА-000",
-      "number": "00",
-      "repo": "hrtech2026/team-hiring-00",
-      "repo_url": "https://github.com/hrtech2026/team-hiring-00",
+      "number": "01",
+      "repo": "hrtech2026/team-hiring-01",
+      "repo_url": "https://github.com/hrtech2026/team-hiring-01",
       "stage_declared": "idea",
       "stage_derived": "idea",
       "progress": 0.1,
       "members": [],
       "stakeholders": [],
-      "concept": "Test concept.",
+      "concept": "Test concept, second team.",
       "artifacts": {
         "01_problem": true,
         "02_asis_analysis": true,
@@ -97,7 +97,7 @@
       "repo_stats": {
         "commits": 3,
         "authors_count": 1,
-        "last_commit_at": "2026-09-29T12:55:03+03:00"
+        "last_commit_at": "2026-09-30T11:19:29+03:00"
       },
       "expert_score": null,
       "expert_scores": null
