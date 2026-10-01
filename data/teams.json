@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-30T08:19:56Z",
+  "generated_at": "2026-09-30T18:20:21Z",
   "source": "sanitize-registry",
   "stages": [
     {
@@ -62,20 +62,20 @@
   ],
   "teams": [
     {
-      "id": "team-hiring-01",
-      "name": "Test Team 2",
-      "slug": "team-hiring-01",
+      "id": "team-hiring-02",
+      "name": "Test Team 3",
+      "slug": "team-hiring-02",
       "track": "hiring",
       "group": "АА-000",
-      "number": "01",
-      "repo": "hrtech2026/team-hiring-01",
-      "repo_url": "https://github.com/hrtech2026/team-hiring-01",
+      "number": "02",
+      "repo": "hrtech2026/team-hiring-02",
+      "repo_url": "https://github.com/hrtech2026/team-hiring-02",
       "stage_declared": "idea",
       "stage_derived": "idea",
       "progress": 0.1,
       "members": [],
       "stakeholders": [],
-      "concept": "Test concept, second team.",
+      "concept": "Проверка освобождения номера после удаления.",
       "artifacts": {
         "01_problem": true,
         "02_asis_analysis": true,
@@ -97,7 +97,7 @@
       "repo_stats": {
         "commits": 3,
         "authors_count": 1,
-        "last_commit_at": "2026-09-30T11:19:29+03:00"
+        "last_commit_at": "2026-09-30T21:19:53+03:00"
       },
       "expert_score": null,
       "expert_scores": null
