@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-01T10:56:25Z",
+  "generated_at": "2026-10-03T05:19:20Z",
   "source": "sanitize-registry",
   "stages": [
     {
@@ -60,5 +60,47 @@
       "title": "Прочее"
     }
   ],
-  "teams": []
+  "teams": [
+    {
+      "id": "team-other-03",
+      "name": "Trust Pulse",
+      "slug": "team-other-03",
+      "track": "other",
+      "group": "26.M01-нето-пу",
+      "number": "03",
+      "repo": "hrtech2026/team-other-03",
+      "repo_url": "https://github.com/hrtech2026/team-other-03",
+      "stage_declared": "idea",
+      "stage_derived": "idea",
+      "progress": 0.1,
+      "members": [],
+      "stakeholders": [],
+      "concept": "HRTech: честная обратная связь - конфликт достоверности и безопасности",
+      "artifacts": {
+        "01_problem": true,
+        "02_asis_analysis": true,
+        "03_tobe_architecture": true,
+        "04_requirements": true,
+        "05_glossary": true
+      },
+      "artifacts_filled": {
+        "01_problem": false,
+        "02_asis_analysis": false,
+        "03_tobe_architecture": false,
+        "04_requirements": false,
+        "05_glossary": false
+      },
+      "diagrams": {
+        "asis": true,
+        "tobe": true
+      },
+      "repo_stats": {
+        "commits": 3,
+        "authors_count": 1,
+        "last_commit_at": "2026-10-03T08:18:54+03:00"
+      },
+      "expert_score": null,
+      "expert_scores": null
+    }
+  ]
 }
