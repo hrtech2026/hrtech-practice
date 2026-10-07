@@ -30,8 +30,7 @@
 ## Витрина проектов
 
 Собранная витрина публикуется в этом же репозитории: если GitHub Pages
-настроен, она доступна по адресу вида
-`https://<organization>.github.io/hrtech-practice/`.
+настроен, она доступна по адресу [https://<organization>.github.io/hrtech-practice/](https://hrtech2026.github.io/hrtech-practice/).
 
 ```text
 data/teams.json   ← снимок реестра, обновляется автоматически
