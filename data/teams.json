@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-07T11:03:37Z",
+  "generated_at": "2026-10-08T19:40:54Z",
   "source": "sanitize-registry",
   "stages": [
     {
@@ -221,6 +221,47 @@
         "commits": 3,
         "authors_count": 1,
         "last_commit_at": "2026-10-05T13:21:07+03:00"
+      },
+      "expert_score": null,
+      "expert_scores": null
+    },
+    {
+      "id": "team-performance-02",
+      "name": "Опора",
+      "slug": "team-performance-02",
+      "track": "performance",
+      "group": "26.М01-нето-пу",
+      "number": "02",
+      "repo": "hrtech2026/team-performance-02",
+      "repo_url": "https://github.com/hrtech2026/team-performance-02",
+      "stage_declared": "idea",
+      "stage_derived": "idea",
+      "progress": 0.1,
+      "members": [],
+      "stakeholders": [],
+      "concept": "«Опора» помогает оценивать вклад в сложные IT-задачи с учётом результата и контекста, защищая глубокую работу от имитации активности; данные готовит система, решение принимает человек.",
+      "artifacts": {
+        "01_problem": true,
+        "02_asis_analysis": true,
+        "03_tobe_architecture": true,
+        "04_requirements": true,
+        "05_glossary": true
+      },
+      "artifacts_filled": {
+        "01_problem": false,
+        "02_asis_analysis": false,
+        "03_tobe_architecture": false,
+        "04_requirements": false,
+        "05_glossary": false
+      },
+      "diagrams": {
+        "asis": true,
+        "tobe": true
+      },
+      "repo_stats": {
+        "commits": 3,
+        "authors_count": 1,
+        "last_commit_at": "2026-10-08T22:40:24+03:00"
       },
       "expert_score": null,
       "expert_scores": null
