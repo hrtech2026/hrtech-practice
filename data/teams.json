@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-12T11:56:56Z",
+  "generated_at": "2026-10-14T09:30:05Z",
   "source": "sanitize-registry",
   "stages": [
     {
@@ -139,6 +139,47 @@
         "commits": 4,
         "authors_count": 1,
         "last_commit_at": "2026-10-07T09:53:06+03:00"
+      },
+      "expert_score": null,
+      "expert_scores": null
+    },
+    {
+      "id": "team-learning-06",
+      "name": "Команда №6",
+      "slug": "team-learning-06",
+      "track": "learning",
+      "group": "26.М01-нето-пу",
+      "number": "06",
+      "repo": "hrtech2026/team-learning-06",
+      "repo_url": "https://github.com/hrtech2026/team-learning-06",
+      "stage_declared": "idea",
+      "stage_derived": "idea",
+      "progress": 0.1,
+      "members": [],
+      "stakeholders": [],
+      "concept": "Система помогает сотруднику превращать рекомендации после performance review в конкретные задачи и пробовать новую роль на текущей позиции.",
+      "artifacts": {
+        "01_problem": true,
+        "02_asis_analysis": true,
+        "03_tobe_architecture": true,
+        "04_requirements": true,
+        "05_glossary": true
+      },
+      "artifacts_filled": {
+        "01_problem": false,
+        "02_asis_analysis": false,
+        "03_tobe_architecture": false,
+        "04_requirements": false,
+        "05_glossary": false
+      },
+      "diagrams": {
+        "asis": true,
+        "tobe": true
+      },
+      "repo_stats": {
+        "commits": 3,
+        "authors_count": 1,
+        "last_commit_at": "2026-10-14T03:30:49+03:00"
       },
       "expert_score": null,
       "expert_scores": null
