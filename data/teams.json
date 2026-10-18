@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-16T09:00:21Z",
+  "generated_at": "2026-10-17T08:32:36Z",
   "source": "sanitize-registry",
   "stages": [
     {
@@ -278,9 +278,31 @@
       "stage_declared": "idea",
       "stage_derived": "idea",
       "progress": 0.1,
-      "members": [],
-      "stakeholders": [],
-      "concept": "«Опора» помогает оценивать вклад в сложные IT-задачи с учётом результата и контекста, защищая глубокую работу от имитации активности; данные готовит система, решение принимает человек.",
+      "members": [
+        {
+          "name": "Драгомиров Даглар",
+          "role": "captain"
+        },
+        {
+          "name": "Логинова Софья Александровна",
+          "role": "analyst"
+        },
+        {
+          "name": "Кузнецов Степан Дмитриевич",
+          "role": "architect"
+        },
+        {
+          "name": "Рябов Павел",
+          "role": "requirements"
+        }
+      ],
+      "stakeholders": [
+        "Сотрудник со сложными задачами",
+        "Руководитель и компетентный ревьюер",
+        "Команда / заказчик результата",
+        "Владелец данных и ответственный за оспаривание"
+      ],
+      "concept": "Опора делает проверяемой договорённость о результате сложной работы: критерий, материал, блокер и человеческий разбор вместо счётчика активности; минимум данных и возможность исправить вывод.",
       "artifacts": {
         "01_problem": true,
         "02_asis_analysis": true,
@@ -289,20 +311,20 @@
         "05_glossary": true
       },
       "artifacts_filled": {
-        "01_problem": false,
+        "01_problem": true,
         "02_asis_analysis": false,
         "03_tobe_architecture": false,
         "04_requirements": false,
-        "05_glossary": false
+        "05_glossary": true
       },
       "diagrams": {
         "asis": true,
         "tobe": true
       },
       "repo_stats": {
-        "commits": 4,
-        "authors_count": 1,
-        "last_commit_at": "2026-10-16T01:10:25+03:00"
+        "commits": 5,
+        "authors_count": 2,
+        "last_commit_at": "2026-10-16T21:40:24+03:00"
       },
       "expert_score": null,
       "expert_scores": null
