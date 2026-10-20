@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-18T08:50:28Z",
+  "generated_at": "2026-10-19T09:52:23Z",
   "source": "sanitize-registry",
   "stages": [
     {
@@ -95,9 +95,9 @@
         "tobe": true
       },
       "repo_stats": {
-        "commits": 4,
+        "commits": 5,
         "authors_count": 1,
-        "last_commit_at": "2026-10-16T01:14:47+03:00"
+        "last_commit_at": "2026-10-18T20:16:20+03:00"
       },
       "expert_score": null,
       "expert_scores": null
@@ -136,9 +136,9 @@
         "tobe": true
       },
       "repo_stats": {
-        "commits": 5,
+        "commits": 6,
         "authors_count": 1,
-        "last_commit_at": "2026-10-16T01:19:19+03:00"
+        "last_commit_at": "2026-10-18T20:16:52+03:00"
       },
       "expert_score": null,
       "expert_scores": null
@@ -177,9 +177,9 @@
         "tobe": true
       },
       "repo_stats": {
-        "commits": 4,
+        "commits": 5,
         "authors_count": 1,
-        "last_commit_at": "2026-10-16T01:09:11+03:00"
+        "last_commit_at": "2026-10-18T20:17:25+03:00"
       },
       "expert_score": null,
       "expert_scores": null
@@ -194,9 +194,26 @@
       "repo": "hrtech2026/team-other-03",
       "repo_url": "https://github.com/hrtech2026/team-other-03",
       "stage_declared": "idea",
-      "stage_derived": "idea",
-      "progress": 0.1,
-      "members": [],
+      "stage_derived": "as_is",
+      "progress": 0.4,
+      "members": [
+        {
+          "name": "Кривенкова Надежда",
+          "role": "analyst"
+        },
+        {
+          "name": "Симончук Диана",
+          "role": "captain"
+        },
+        {
+          "name": "Свинцова Ирина",
+          "role": "architect"
+        },
+        {
+          "name": "Жигало Сергей",
+          "role": "requirements"
+        }
+      ],
       "stakeholders": [],
       "concept": "HRTech: честная обратная связь - конфликт достоверности и безопасности",
       "artifacts": {
@@ -207,8 +224,8 @@
         "05_glossary": true
       },
       "artifacts_filled": {
-        "01_problem": false,
-        "02_asis_analysis": false,
+        "01_problem": true,
+        "02_asis_analysis": true,
         "03_tobe_architecture": false,
         "04_requirements": false,
         "05_glossary": false
@@ -218,9 +235,9 @@
         "tobe": true
       },
       "repo_stats": {
-        "commits": 4,
-        "authors_count": 1,
-        "last_commit_at": "2026-10-16T01:15:57+03:00"
+        "commits": 15,
+        "authors_count": 2,
+        "last_commit_at": "2026-10-18T20:17:58+03:00"
       },
       "expert_score": null,
       "expert_scores": null
@@ -259,9 +276,9 @@
         "tobe": true
       },
       "repo_stats": {
-        "commits": 4,
+        "commits": 5,
         "authors_count": 1,
-        "last_commit_at": "2026-10-16T01:09:51+03:00"
+        "last_commit_at": "2026-10-18T20:18:31+03:00"
       },
       "expert_score": null,
       "expert_scores": null
@@ -285,7 +302,7 @@
         },
         {
           "name": "Логинова Софья Александровна",
-          "role": "analyst"
+          "role": "requirements"
         },
         {
           "name": "Кузнецов Степан Дмитриевич",
@@ -293,7 +310,7 @@
         },
         {
           "name": "Рябов Павел",
-          "role": "requirements"
+          "role": "analyst"
         }
       ],
       "stakeholders": [
@@ -322,9 +339,9 @@
         "tobe": true
       },
       "repo_stats": {
-        "commits": 5,
+        "commits": 7,
         "authors_count": 2,
-        "last_commit_at": "2026-10-16T21:40:24+03:00"
+        "last_commit_at": "2026-10-18T20:21:20+03:00"
       },
       "expert_score": null,
       "expert_scores": null
