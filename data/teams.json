@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-05T12:17:53Z",
+  "generated_at": "2026-11-06T12:04:28Z",
   "source": "sanitize-registry",
   "stages": [
     {
@@ -116,9 +116,9 @@
         "tobe": true
       },
       "repo_stats": {
-        "commits": 11,
+        "commits": 13,
         "authors_count": 3,
-        "last_commit_at": "2026-11-02T22:07:44+03:00"
+        "last_commit_at": "2026-11-05T18:31:57+03:00"
       },
       "expert_score": null,
       "expert_scores": null
@@ -176,7 +176,20 @@
       "stage_declared": "idea",
       "stage_derived": "idea",
       "progress": 0.1,
-      "members": [],
+      "members": [
+        {
+          "name": "Кристина Подольская",
+          "role": "captain"
+        },
+        {
+          "name": "Анастасия Гусева",
+          "role": "analyst"
+        },
+        {
+          "name": "Леонов Андрей",
+          "role": "architect"
+        }
+      ],
       "stakeholders": [],
       "concept": "Система помогает сотруднику превращать рекомендации после performance review в конкретные задачи и пробовать новую роль на текущей позиции.",
       "artifacts": {
@@ -198,9 +211,9 @@
         "tobe": true
       },
       "repo_stats": {
-        "commits": 5,
-        "authors_count": 1,
-        "last_commit_at": "2026-10-18T20:17:25+03:00"
+        "commits": 6,
+        "authors_count": 2,
+        "last_commit_at": "2026-11-05T18:53:36+03:00"
       },
       "expert_score": null,
       "expert_scores": null
@@ -314,8 +327,8 @@
       "repo": "hrtech2026/team-performance-02",
       "repo_url": "https://github.com/hrtech2026/team-performance-02",
       "stage_declared": "idea",
-      "stage_derived": "idea",
-      "progress": 0.1,
+      "stage_derived": "requirements",
+      "progress": 0.9,
       "members": [
         {
           "name": "Драгомиров Даглар",
@@ -350,9 +363,9 @@
       },
       "artifacts_filled": {
         "01_problem": true,
-        "02_asis_analysis": false,
-        "03_tobe_architecture": false,
-        "04_requirements": false,
+        "02_asis_analysis": true,
+        "03_tobe_architecture": true,
+        "04_requirements": true,
         "05_glossary": true
       },
       "diagrams": {
@@ -360,9 +373,9 @@
         "tobe": true
       },
       "repo_stats": {
-        "commits": 8,
+        "commits": 11,
         "authors_count": 2,
-        "last_commit_at": "2026-10-20T15:08:50+03:00"
+        "last_commit_at": "2026-11-05T16:47:45+03:00"
       },
       "expert_score": null,
       "expert_scores": null
