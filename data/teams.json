@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-08T11:15:38Z",
+  "generated_at": "2026-11-09T12:50:18Z",
   "source": "sanitize-registry",
   "stages": [
     {
@@ -135,7 +135,24 @@
       "stage_declared": "idea",
       "stage_derived": "requirements",
       "progress": 0.9,
-      "members": [],
+      "members": [
+        {
+          "name": "@artemiy-0",
+          "role": "captain"
+        },
+        {
+          "name": "@romu1etta",
+          "role": "analyst"
+        },
+        {
+          "name": "@artemkrskk",
+          "role": "architect"
+        },
+        {
+          "name": "@Valeriia15",
+          "role": "requirements"
+        }
+      ],
       "stakeholders": [],
       "concept": "Исполльзоване ИИ на рынке найма: помощь в анализе резюме/ИИ как адвизор для HR",
       "artifacts": {
@@ -157,9 +174,9 @@
         "tobe": true
       },
       "repo_stats": {
-        "commits": 14,
+        "commits": 16,
         "authors_count": 3,
-        "last_commit_at": "2026-11-05T11:57:44+03:00"
+        "last_commit_at": "2026-11-08T19:11:05+03:00"
       },
       "expert_score": null,
       "expert_scores": null
@@ -228,8 +245,8 @@
       "repo": "hrtech2026/team-other-03",
       "repo_url": "https://github.com/hrtech2026/team-other-03",
       "stage_declared": "idea",
-      "stage_derived": "as_is",
-      "progress": 0.4,
+      "stage_derived": "requirements",
+      "progress": 0.9,
       "members": [
         {
           "name": "Кривенкова Надежда",
@@ -260,18 +277,18 @@
       "artifacts_filled": {
         "01_problem": true,
         "02_asis_analysis": true,
-        "03_tobe_architecture": false,
-        "04_requirements": false,
-        "05_glossary": false
+        "03_tobe_architecture": true,
+        "04_requirements": true,
+        "05_glossary": true
       },
       "diagrams": {
         "asis": true,
         "tobe": true
       },
       "repo_stats": {
-        "commits": 15,
-        "authors_count": 2,
-        "last_commit_at": "2026-10-18T20:17:58+03:00"
+        "commits": 40,
+        "authors_count": 4,
+        "last_commit_at": "2026-11-09T15:46:27+03:00"
       },
       "expert_score": null,
       "expert_scores": null
