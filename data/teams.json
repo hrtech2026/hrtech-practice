@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-09T12:50:18Z",
+  "generated_at": "2026-11-10T12:36:58Z",
   "source": "sanitize-registry",
   "stages": [
     {
@@ -142,7 +142,7 @@
         },
         {
           "name": "@romu1etta",
-          "role": "analyst"
+          "role": "requirements"
         },
         {
           "name": "@artemkrskk",
@@ -150,7 +150,7 @@
         },
         {
           "name": "@Valeriia15",
-          "role": "requirements"
+          "role": "analyst"
         }
       ],
       "stakeholders": [],
@@ -174,9 +174,9 @@
         "tobe": true
       },
       "repo_stats": {
-        "commits": 16,
+        "commits": 17,
         "authors_count": 3,
-        "last_commit_at": "2026-11-08T19:11:05+03:00"
+        "last_commit_at": "2026-11-09T20:07:59+03:00"
       },
       "expert_score": null,
       "expert_scores": null
