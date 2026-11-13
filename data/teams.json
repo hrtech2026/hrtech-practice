@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-11T14:38:07Z",
+  "generated_at": "2026-11-12T12:41:18Z",
   "source": "sanitize-registry",
   "stages": [
     {
@@ -207,8 +207,13 @@
           "role": "architect"
         }
       ],
-      "stakeholders": [],
-      "concept": "Система помогает сотруднику превращать рекомендации после performance review в конкретные задачи и пробовать новую роль на текущей позиции.",
+      "stakeholders": [
+        "Сотрудник после performance review",
+        "Руководитель",
+        "HR и команда обучения и развития",
+        "Компания"
+      ],
+      "concept": "На основе рекомендаций по итогам performance review сервис предлагает сотруднику рабочие задачи, которые помогают развить нужные навыки или попробовать отдельные обязанности новой роли на текущей позиции.",
       "artifacts": {
         "01_problem": true,
         "02_asis_analysis": true,
@@ -217,7 +222,7 @@
         "05_glossary": true
       },
       "artifacts_filled": {
-        "01_problem": false,
+        "01_problem": true,
         "02_asis_analysis": false,
         "03_tobe_architecture": false,
         "04_requirements": false,
@@ -228,9 +233,9 @@
         "tobe": true
       },
       "repo_stats": {
-        "commits": 6,
+        "commits": 7,
         "authors_count": 2,
-        "last_commit_at": "2026-11-05T18:53:36+03:00"
+        "last_commit_at": "2026-11-11T18:27:59+03:00"
       },
       "expert_score": null,
       "expert_scores": null
