@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-12T12:41:18Z",
+  "generated_at": "2026-11-13T12:10:36Z",
   "source": "sanitize-registry",
   "stages": [
     {
@@ -361,10 +361,6 @@
           "role": "requirements"
         },
         {
-          "name": "Кузнецов Степан Дмитриевич",
-          "role": "architect"
-        },
-        {
           "name": "Рябов Павел",
           "role": "analyst"
         }
@@ -395,9 +391,9 @@
         "tobe": true
       },
       "repo_stats": {
-        "commits": 11,
+        "commits": 12,
         "authors_count": 2,
-        "last_commit_at": "2026-11-05T16:47:45+03:00"
+        "last_commit_at": "2026-11-12T19:18:45+03:00"
       },
       "expert_score": null,
       "expert_scores": null
