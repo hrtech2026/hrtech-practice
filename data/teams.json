@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-13T12:10:36Z",
+  "generated_at": "2026-11-14T11:26:54Z",
   "source": "sanitize-registry",
   "stages": [
     {
@@ -70,17 +70,17 @@
       "number": "01",
       "repo": "hrtech2026/team-hiring-01",
       "repo_url": "https://github.com/hrtech2026/team-hiring-01",
-      "stage_declared": "to_be",
+      "stage_declared": "requirements",
       "stage_derived": "to_be",
       "progress": 0.7,
       "members": [
         {
           "name": "Гаврилов Евгений",
-          "role": "analyst"
+          "role": "data_researcher"
         },
         {
           "name": "Алещенко Ксения",
-          "role": "architect"
+          "role": "analyst"
         },
         {
           "name": "Фомин Кирилл",
@@ -92,7 +92,7 @@
         },
         {
           "name": "Исакова Анна",
-          "role": "data_researcher"
+          "role": "architect"
         }
       ],
       "stakeholders": [],
@@ -116,9 +116,9 @@
         "tobe": true
       },
       "repo_stats": {
-        "commits": 13,
-        "authors_count": 3,
-        "last_commit_at": "2026-11-05T18:31:57+03:00"
+        "commits": 20,
+        "authors_count": 4,
+        "last_commit_at": "2026-11-13T21:18:28+03:00"
       },
       "expert_score": null,
       "expert_scores": null
