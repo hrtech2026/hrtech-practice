@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-15T11:56:01Z",
+  "generated_at": "2026-11-16T12:43:06Z",
   "source": "sanitize-registry",
   "stages": [
     {
@@ -137,19 +137,19 @@
       "progress": 0.9,
       "members": [
         {
-          "name": "@artemiy-0",
+          "name": "Артемий Чуриков",
           "role": "captain"
         },
         {
-          "name": "@romu1etta",
+          "name": "Роман Зеленский",
           "role": "requirements"
         },
         {
-          "name": "@artemkrskk",
+          "name": "Артем Корсак",
           "role": "architect"
         },
         {
-          "name": "@Valeriia15",
+          "name": "Валерия Горюнова",
           "role": "analyst"
         }
       ],
@@ -174,9 +174,9 @@
         "tobe": true
       },
       "repo_stats": {
-        "commits": 17,
+        "commits": 23,
         "authors_count": 3,
-        "last_commit_at": "2026-11-09T20:07:59+03:00"
+        "last_commit_at": "2026-11-15T18:07:10+03:00"
       },
       "expert_score": null,
       "expert_scores": null
