@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-16T12:43:06Z",
+  "generated_at": "2026-11-17T13:21:54Z",
   "source": "sanitize-registry",
   "stages": [
     {
@@ -71,8 +71,8 @@
       "repo": "hrtech2026/team-hiring-01",
       "repo_url": "https://github.com/hrtech2026/team-hiring-01",
       "stage_declared": "requirements",
-      "stage_derived": "to_be",
-      "progress": 0.7,
+      "stage_derived": "requirements",
+      "progress": 0.9,
       "members": [
         {
           "name": "Гаврилов Евгений",
@@ -108,7 +108,7 @@
         "01_problem": true,
         "02_asis_analysis": true,
         "03_tobe_architecture": true,
-        "04_requirements": false,
+        "04_requirements": true,
         "05_glossary": false
       },
       "diagrams": {
@@ -116,9 +116,9 @@
         "tobe": true
       },
       "repo_stats": {
-        "commits": 20,
+        "commits": 24,
         "authors_count": 4,
-        "last_commit_at": "2026-11-13T21:18:28+03:00"
+        "last_commit_at": "2026-11-16T20:38:44+03:00"
       },
       "expert_score": null,
       "expert_scores": null
@@ -174,9 +174,9 @@
         "tobe": true
       },
       "repo_stats": {
-        "commits": 23,
+        "commits": 29,
         "authors_count": 3,
-        "last_commit_at": "2026-11-15T18:07:10+03:00"
+        "last_commit_at": "2026-11-17T08:58:22+03:00"
       },
       "expert_score": null,
       "expert_scores": null
