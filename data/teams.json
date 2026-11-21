@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-19T13:01:13Z",
+  "generated_at": "2026-11-20T12:52:01Z",
   "source": "sanitize-registry",
   "stages": [
     {
@@ -191,8 +191,8 @@
       "repo": "hrtech2026/team-learning-06",
       "repo_url": "https://github.com/hrtech2026/team-learning-06",
       "stage_declared": "idea",
-      "stage_derived": "as_is",
-      "progress": 0.4,
+      "stage_derived": "requirements",
+      "progress": 0.9,
       "members": [
         {
           "name": "Кристина Подольская",
@@ -224,18 +224,18 @@
       "artifacts_filled": {
         "01_problem": true,
         "02_asis_analysis": true,
-        "03_tobe_architecture": false,
-        "04_requirements": false,
-        "05_glossary": false
+        "03_tobe_architecture": true,
+        "04_requirements": true,
+        "05_glossary": true
       },
       "diagrams": {
         "asis": true,
         "tobe": true
       },
       "repo_stats": {
-        "commits": 10,
-        "authors_count": 4,
-        "last_commit_at": "2026-11-18T23:35:26+05:00"
+        "commits": 12,
+        "authors_count": 6,
+        "last_commit_at": "2026-11-19T17:19:33+03:00"
       },
       "expert_score": null,
       "expert_scores": null
@@ -349,9 +349,9 @@
         "tobe": true
       },
       "repo_stats": {
-        "commits": 25,
+        "commits": 27,
         "authors_count": 3,
-        "last_commit_at": "2026-11-17T21:27:36+03:00"
+        "last_commit_at": "2026-11-19T17:50:08+03:00"
       },
       "expert_score": null,
       "expert_scores": null
