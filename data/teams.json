@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-11-24T14:51:07Z",
+  "generated_at": "2026-11-25T14:18:48Z",
   "source": "sanitize-registry",
   "stages": [
     {
@@ -174,9 +174,9 @@
         "tobe": true
       },
       "repo_stats": {
-        "commits": 29,
+        "commits": 31,
         "authors_count": 3,
-        "last_commit_at": "2026-11-17T08:58:22+03:00"
+        "last_commit_at": "2026-11-25T10:01:26+03:00"
       },
       "expert_score": null,
       "expert_scores": null
